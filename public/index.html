@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Chatly - socket.io Application</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="stylesheets/chatly.css">
+	</head>
+	<body>
+        <div class="nameSelectionBox">
+            <form class="container nameForm">
+                <h1>CHATLY</h1>
+                <div class="well">
+                    <h3>
+                        ENTER A USER NAME YOU WOULD LIKE TO USE IN CHATLY!
+                    </h3>                        
+                    <div class="nameEntry">
+                        <input class="child form-control" autocomplete="off" placeholder="Enter Name"/>
+                        <button class="child btn btn-default">Save</button>
+                    </div>
+                    <h5 class="errorMsgUsername">
+                        This usename is already taken or unavailable, choose another one!
+                        <br>Can only use alphanumeric values. No spaces.
+                    </h5>
+                </div>
+            </form>
+        </div>
+		<div class="container mainBox">
+            <div class="row brandBar">
+			    <div class="brandText">
+                    <h3 class="headTitle">CHATLY</h3>
+                    <p>A SOCKET.IO APPLICATION</p>
+                </div>
+                <button class="usersBtn btn btn-default">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="chatlyContainer" action="">
+                        <div class="form-group">
+                            <div class="chatlyBox well">
+                                <ul></ul> <!-- Convo Container -->
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <div class="messageBox">
+                                <input autocomplete="off" class="form-control" placeholder="Enter Message..."/>
+                            </div>
+                            <div class="sendBtn">
+                                <button class="btn btn-default">
+                                    Send
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form> <!-- END of chatlyContainer -->
+                </div>
+            </div> <!-- END of row -->
+            <footer>
+                <p>
+                    Copyright © 2016 Chatly. Created by Alex Aldana.
+                </p>
+            </footer>
+		</div> <!-- END of Container -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/chatly.js"></script>
+	</body>
+</html>
