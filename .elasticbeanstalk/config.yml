@@ -1,0 +1,14 @@
+branch-defaults:
+  qa:
+    environment: Chatly-qa
+  master:
+    environment: Chatly
+  default:
+    environment: Chatly-qa
+global:
+  application_name: Chatly
+  default_ec2_keyname: null
+  default_platform: Docker 1.11.2
+  default_region: us-east-1
+  profile: eb-cli
+  sc: git
