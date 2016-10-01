@@ -1,26 +1,28 @@
-build_image: node
-language:
-  - node_js
-node_js:
-  - "4.6.0"
-branches:
-  only:
-    - master
-    - qa
-before_install:
-  - apt-get install -y python-dev
-  - pip install awsebcli
-install:
-  - npm install
-before_script:
-  - mkdir -p ~/.aws
-  - echo '[profile eb-cli]' > ~/.aws/config
-  - echo "aws_access_key_id = $AWSAccessKeyId" >> ~/.aws/config
-  - echo "aws_secret_access_key = $AWSSecretKey" >> ~/.aws/config
-script:
-  - npm test
-commit_container: alexald/chatly
-after_success:
-  - eb init && eb deploy --timeout 20
-notifications:
-  email: false
+# Language settings
+language: node_js
+
+build:
+  ci:
+    - echo 'CI is running'
+
+  post_ci:
+      # DockerHub
+      - docker build -t="alexald/chatly-app:$BRANCH.$BUILD_NUMBER" .
+      - docker push alexald/chatly-app:$BRANCH.$BUILD_NUMBER
+      # Addresses botocore version mismatch errors
+      #- pip install --upgrade botocore
+
+integrations:
+  deploy:
+    # AWS Integration to deploy Docker image
+    - integrationName: "AWS"
+      type: aws
+      application_name: "Chatly"
+      env_name: "chatly"
+      region: "us-east-1"
+      image_name: "alexald/chatly-app"
+      image_tag: "$BRANCH.$BUILD_NUMBER"
+
+  hub:
+    - integrationName: "DockerH"
+      type: docker

@@ -1,10 +1,7 @@
 branch-defaults:
-  qa:
-    environment: Chatly-qa
-  master:
-    environment: Chatly
-  default:
-    environment: Chatly-qa
+  QA:
+    environment: chatly
+    group_suffix: null
 global:
   application_name: Chatly
   default_ec2_keyname: null
