@@ -2,6 +2,12 @@
 language: node_js
 
 build:
+  # build and process only release branches
+  branches:
+    only:
+      - QA
+      - master
+
   ci:
     - echo 'CI is running'
 
@@ -10,7 +16,7 @@ build:
       - docker build -t="alexald/chatly-app:$BRANCH.$BUILD_NUMBER" .
       - docker push alexald/chatly-app:$BRANCH.$BUILD_NUMBER
       # Addresses botocore version mismatch errors
-      #- pip install --upgrade botocore
+      - pip install --upgrade botocore
 
 integrations:
   deploy:
@@ -18,7 +24,7 @@ integrations:
     - integrationName: "AWS"
       type: aws
       application_name: "Chatly"
-      env_name: "chatly"
+      #env_name: "chatly"
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
