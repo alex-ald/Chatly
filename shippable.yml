@@ -30,7 +30,7 @@ integrations:
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
-      
+
     # AWS Integration to deploy Docker image
     - integrationName: "AWS"
       type: aws
@@ -38,7 +38,7 @@ integrations:
       branches:
         only:
           - master
-      env_name: chatly-prod-end
+      env_name: chatly-prod-env
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
