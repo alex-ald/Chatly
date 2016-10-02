@@ -8,8 +8,7 @@ branches:
 
 env:
   global:
-    - if [ "$BRANCH" == "master" ]; then APP_ENV=chatly-prod-env; fi
-    - if [ "$BRANCH" == "QA" ]; then APP_ENV==chatly--qa; fi
+    - if [ "$BRANCH" == "master" ] ; then DEPLOY_ENV="chatly-prod-env" ; else DEPLOY_ENV="chatly--qa" ; fi
 build:
   ci:
     - echo 'CI is running'
