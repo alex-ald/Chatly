@@ -6,9 +6,6 @@ branches:
     - QA
     - master
 
-env:
-  global:
-    - if [ "$BRANCH" == "master" ] ; then DEPLOY_ENV="chatly-prod-env" ; else DEPLOY_ENV="chatly--qa" ; fi
 build:
   ci:
     - echo 'CI is running'
@@ -26,7 +23,23 @@ integrations:
     - integrationName: "AWS"
       type: aws
       application_name: "Chatly"
-      env_name: $APP_ENV
+      branches:
+        only:
+          - QA
+      env_name: chatly--qa
+      region: "us-east-1"
+      image_name: "alexald/chatly-app"
+      image_tag: "$BRANCH.$BUILD_NUMBER"
+
+  deploy:
+    # AWS Integration to deploy Docker image
+    - integrationName: "AWS"
+      type: aws
+      application_name: "Chatly"
+      branches:
+        only:
+          - master
+      env_name: chatly-prod-end
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
