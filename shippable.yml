@@ -2,11 +2,6 @@
 language: node_js
 
 build:
-  # build and process only release branches
-  branches:
-    only:
-      - QA
-      - master
 
   ci:
     - echo 'CI is running'
@@ -24,7 +19,23 @@ integrations:
     - integrationName: "AWS"
       type: aws
       application_name: "Chatly"
-      #env_name: "chatly"
+        branches:
+          only:
+            - master
+      env_name: "chatly-prod-env"
+      region: "us-east-1"
+      image_name: "alexald/chatly-app"
+      image_tag: "$BRANCH.$BUILD_NUMBER"
+
+  deploy:
+    # AWS Integration to deploy Docker image
+    - integrationName: "AWS"
+      type: aws
+      application_name: "Chatly"
+        branches:
+          only:
+            - QA
+      env_name: "chatly--qa"
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
