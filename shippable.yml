@@ -38,7 +38,7 @@ integrations:
       branches:
         only:
           - master
-      env_name: chatly-prod-env
+      env_name: Chatly-prod-env
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
