@@ -2,7 +2,7 @@ branch-defaults:
   QA:
     environment: chatly--qa
   master:
-    environment: Chatly-prod-env
+    environment: chatly-env-prod
   default:
     environment: chatly--qa
 global:

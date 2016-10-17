@@ -11,15 +11,12 @@ build:
     - echo 'CI is running'
 
   post_ci:
-      # DockerHub
-      - docker build -t="alexald/chatly-app:$BRANCH.$BUILD_NUMBER" .
-      - docker push alexald/chatly-app:$BRANCH.$BUILD_NUMBER
       # Addresses botocore version mismatch errors
       - pip install --upgrade botocore
 
 integrations:
   deploy:
-    # AWS Integration to deploy Docker image
+    # AWS Integration to deploy Docker image - to QA
     - integrationName: "AWS"
       type: aws
       application_name: "Chatly"
@@ -31,18 +28,14 @@ integrations:
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
 
-    # AWS Integration to deploy Docker image
+    # AWS Integration to deploy Docker image - to PROD
     - integrationName: "AWS"
       type: aws
       application_name: "Chatly"
       branches:
         only:
           - master
-      env_name: Chatly-prod-env
+      env_name: chatly-env-prod
       region: "us-east-1"
       image_name: "alexald/chatly-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
-
-  hub:
-    - integrationName: "DockerH"
-      type: docker
