@@ -29,13 +29,13 @@ integrations:
       image_tag: "$BRANCH.$BUILD_NUMBER"
 
     # AWS Integration to deploy Docker image - to PROD
-    - integrationName: "AWS"
+    - integrationName: "AWS-KS"
       type: aws
-      application_name: "Chatly"
+      application_name: "Kdispatch"
       branches:
         only:
           - master
-      env_name: chatly-env-prod
-      region: "us-east-1"
-      image_name: "alexald/chatly-app"
+      env_name: kdispatch-prod-env
+      region: "us-west-2"
+      image_name: "kdispatch-app"
       image_tag: "$BRANCH.$BUILD_NUMBER"
