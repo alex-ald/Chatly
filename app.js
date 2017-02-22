@@ -4,20 +4,12 @@
 // Chatly - A Socket.io Application
 //------------------------------------------------------------------------------
 
-// cfenv provides access to your Cloud Foundry environment
-// for more info, see: https://www.npmjs.com/package/cfenv
-var cfenv = require('cfenv');
-
 // This application uses express as its web server
-// for more info, see: http://expressjs.com
 var express = require('express');
 var app = express();
 
-// get the app environment from Cloud Foundry
-var appEnv = cfenv.getAppEnv();
-
 // setup port or prod and dev
-var port = 8080;
+var port = process.env.PORT || 8080;
 
 // create the server so that we can run for socket.io
 var http = require('http').Server(app);
@@ -31,7 +23,6 @@ app.use(express.static(__dirname + '/public'));
 // start server on the specified port and binding host
 http.listen(port, '0.0.0.0', function() {
 	// message when the sever starts listening
-	console.log("server stating on " + appEnv.url);
 	console.log("port number is: " + port);
 });
 
